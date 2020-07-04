@@ -31,10 +31,14 @@ export class EditBookComponent implements OnInit {
   }
 
   setMostPopular(): void {
-    this.dataService.setMostPopularBook(this.selectedBook);
+    this.dataService.setMostPopularBook(this.selectedBook); 
   }
 
   saveChanges(): void {
-    console.warn('Save changes to book not yet implemented.');
+    //console.warn('Save changes to book not yet implemented.');
+    this.dataService.updateBook(this.selectedBook).subscribe(
+      (data: void) => console.log(`${this.selectedBook.bookID} updated successfuly`),
+      (err: any) => console.log(err)
+    )
   }
 }
