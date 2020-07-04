@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AddBookComponent } from './add-book/add-book.component';
@@ -12,6 +13,13 @@ import { EditReaderComponent } from './edit-reader/edit-reader.component';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CoreModule,
+    HttpClientModule
+  ],
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -19,12 +27,6 @@ import { CoreModule } from './core/core.module';
     EditReaderComponent,
     EditBookComponent,
     AddReaderComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
