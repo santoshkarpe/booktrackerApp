@@ -3,6 +3,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpEventType } f
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+@Injectable()
 export class LogResponseInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
