@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Book } from '../models/book';
 import { DataService } from '../core/data.service';
+import { OldBook } from '../models/oldBook';
 
 @Component({
   selector: 'app-edit-book',
@@ -22,6 +23,10 @@ export class EditBookComponent implements OnInit {
     this.dataService.getBookById(bookID).subscribe(
       (data: Book) => this.selectedBook = data,
       (err: any) => console.log(err)
+    )
+
+    this.dataService.getOldBookById(bookID).subscribe(
+      (data: OldBook) => console.log(`Old book title: ${data.bookTitle}`)
     )
   }
 

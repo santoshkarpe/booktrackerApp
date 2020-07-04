@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { map,tap } from 'rxjs/operators'
 
 import { allBooks, allReaders } from '../data';
 import { Reader } from "../models/reader";
 import { Book } from "../models/book";
 import { BookTrackerError } from '../models/bookTrackerError';
+import { OldBook } from '../models/oldBook'
 
 @Injectable()
 export class DataService {
@@ -52,5 +54,18 @@ export class DataService {
       })
     })
 
-  }  
+  }
+  
+  getOldBookById(id: number): Observable<OldBook> {
+
+    return this.http.get<Book>(`/api/books/${id}`)
+              .pipe(
+                map( b => <OldBook> {
+                  bookTitle: b.title,
+                  year: b.publicationYear
+                }),
+                tap( classicBook => console.log(classicBook))
+              );
+
+  }
 }
