@@ -10,6 +10,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { EditReaderComponent } from './edit-reader/edit-reader.component';
 import { CoreModule } from './core/core.module';
+import { LoggerService } from './core/logger.service';
+import { DataService } from './core/data.service';
+import { PlainLoggerService } from './core/plain-logger.service';
+import { dataServiceFactory } from "./core/dataServiceFactory";
+
 
 @NgModule({
   declarations: [
@@ -26,7 +31,22 @@ import { CoreModule } from './core/core.module';
     FormsModule,
     CoreModule
   ],
-  providers: [],
+  providers: [ 
+    LoggerService,
+    //{ provide: LoggerService, useClass: LoggerService },   // 1 way
+    //{ provide: LoggerService, useClass: PlainLoggerService },  // 2 way
+    /* 
+    PlainLoggerService,  // 3 way
+    { provide: LoggerService, useExisting: PlainLoggerService }, */
+    // 4 way
+    /* { provide: LoggerService, useValue: {
+      log: (message) => console.log(`MESSAGE: ${message}`),
+      error: (message) => console.log(`PROBLEM: ${message}`)
+
+    } }, */
+    //DataService 
+    { provide: DataService, useFactory: dataServiceFactory, deps: [LoggerService] }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
