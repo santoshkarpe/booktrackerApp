@@ -26,10 +26,16 @@ export class DashboardComponent implements OnInit {
   
   ngOnInit() {
     this.allBooks = this.dataService.getAllBooks();
-    this.allReaders = this.dataService.getAllReaders();
+    //this.allReaders = this.dataService.getAllReaders();
+    this.dataService.getAllReaders().subscribe(
+      data => this.allReaders = data,
+      err => console.log(err),
+      () => console.log('All done getting readers!')
+    )
     this.mostPopularBook = this.dataService.mostPopularBook;
 
     this.title.setTitle(`Book Tracker`);
+    this.loggerService.log('Done with dashboard initialization')
   }
 
   deleteBook(bookID: number): void {

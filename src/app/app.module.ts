@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AddBookComponent } from './add-book/add-book.component';
@@ -29,10 +30,12 @@ import { dataServiceFactory } from "./core/dataServiceFactory";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule
   ],
   providers: [ 
     LoggerService,
+    DataService
     //{ provide: LoggerService, useClass: LoggerService },   // 1 way
     //{ provide: LoggerService, useClass: PlainLoggerService },  // 2 way
     /* 
@@ -44,8 +47,9 @@ import { dataServiceFactory } from "./core/dataServiceFactory";
       error: (message) => console.log(`PROBLEM: ${message}`)
 
     } }, */
-    //DataService 
-    { provide: DataService, useFactory: dataServiceFactory, deps: [LoggerService] }
+     
+    /* way 5
+    { provide: DataService, useFactory: dataServiceFactory, deps: [LoggerService] } */
   ],
   bootstrap: [AppComponent]
 })
