@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,6 +15,7 @@ import { LoggerService } from './core/logger.service';
 import { DataService } from './core/data.service';
 import { PlainLoggerService } from './core/plain-logger.service';
 import { dataServiceFactory } from "./core/dataServiceFactory";
+import { BookTrackerErrorHandlerService } from './core/book-tracker-error-handler.service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { dataServiceFactory } from "./core/dataServiceFactory";
   ],
   providers: [ 
     LoggerService,
-    DataService
+    DataService,
+    { provide: ErrorHandler, useClass: BookTrackerErrorHandlerService }
     //{ provide: LoggerService, useClass: LoggerService },   // 1 way
     //{ provide: LoggerService, useClass: PlainLoggerService },  // 2 way
     /* 

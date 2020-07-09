@@ -44,7 +44,9 @@ export class DashboardComponent implements OnInit {
     this.getAuthorRecommendationAsync(1)  // -1,1 
         .catch(err => this.loggerService.error(err));
 
-    this.loggerService.log('Done with dashboard initialization')
+    this.loggerService.log('Done with dashboard initialization');
+
+    throw new Error('Internal Server Error.');
   }
 
   private async getAuthorRecommendationAsync(readerId: number): Promise<void> {
