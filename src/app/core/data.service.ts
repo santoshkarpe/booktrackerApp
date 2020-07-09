@@ -17,12 +17,24 @@ export class DataService {
 
   mostPopularBook: Book = allBooks[0];
 
+  getAuthorRecommendation(readerID: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if(readerID > 0) {
+          resolve('Dr ABC')
+        } else {
+          reject('Invalid reader ID')
+        }
+      }, 2000);  // time in milisec == 2 sec
+    })
+  }  // calling from dahboard.com.ts
+
   setMostPopularBook(popularBook: Book): void {
     this.mostPopularBook = popularBook;
   }
 
   getAllReaders(): Observable<Reader[] | BookTrackerError> {
-    return this.http.get<Reader[]>('/api/errors/500')   // '/api/errors/500'   '/api/readers'
+    return this.http.get<Reader[]>('/api/readers')   // '/api/errors/500'   '/api/readers'
     .pipe(
       catchError(this.handleHttpError)
     );
