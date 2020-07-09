@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION, Version } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     )
     this.mostPopularBook = this.dataService.mostPopularBook;
 
-    this.title.setTitle(`Book Tracker`);
+    this.title.setTitle(`Book Tracker SBK ${VERSION.full}`);
 
     /* this.dataService.getAuthorRecommendation(1).then(
       (author: string) => this.loggerService.log(author),
